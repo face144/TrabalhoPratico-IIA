@@ -1,4 +1,4 @@
-globals [cnt choice cleaner-waste]
+globals [cnt choice cleaner-waste is-immune]
 
 breed [eaters eater]
 breed [cleaners cleaner]
@@ -59,6 +59,7 @@ to setUpTurtles
     set shape "person"
     set color 67
     set size 1
+    set is-immune 0
     setxy random-xcor random-ycor
   ]
 
@@ -77,14 +78,23 @@ to Go
   eatersStart
   cleanersStart
 
-  if count eaters = 0 and count cleaners = 0
-    [stop]
+  if count eaters = 0 [
+    user-message "Eaters have died. The earth and eveerything elde will die with them soon."
+    stop
+  ]
+
+  if count eaters > 10000 [
+    user-message "Eaters have inherited the earth."
+    stop
+  ]
+
    tick
 end
 
 to eatersStart
   eaterRules
   eaterActions
+  eaterReproduce
 
   ask eaters [
     set energy energy - 1
@@ -94,6 +104,24 @@ to eatersStart
     ]
   ]
 end
+
+; modelo melhorado
+;
+
+to eaterReproduce
+  ask eaters [
+    if count eaters-here >= 2 and random 101 < 40 [
+      if energy > 50 [
+        set energy energy - 50
+        hatch 1 [set energy start-energy set is-immune 1]
+      ]
+    ]
+  ]
+end
+
+
+; end modelo melhorado
+;
 
 to eaterRules
   ask eaters [
@@ -127,30 +155,6 @@ to eaterRules
 end
 
 to eaterActions
-  ;reproduction
-  if count eaters-on patch-ahead 1 >= 1 [
-    if random 101 < 50 [
-      fd 1
-      eaterReproduce
-    ]
-  ]
-
-  if count eaters-on patch-left-and-ahead 90 1 >= 1 [
-    if random 101 < 50 [
-      lt 90
-      fd 1
-      eaterReproduce
-    ]
-  ]
-
-  if count eaters-on patch-right-and-ahead 90 1 >= 1 [
-    if random 101 < 50 [
-      rt 90
-      fd 1
-      eaterReproduce
-    ]
-  ]
-
   ;food
   ask eaters [
 
@@ -170,19 +174,25 @@ to eaterActions
 
     ;waste
     if [pcolor] of patch-ahead 1 = yellow [
-      set energy energy - energy * 0.05
+      if is-immune = 0 [
+        set energy energy - energy * 0.05
+      ]
       rt 180
       fd 1
     ]
 
     if [pcolor] of patch-ahead 1 = red [
-      set energy energy - energy * 0.1
+      if is-immune = 0 [
+        set energy energy - energy * 0.1
+      ]
       rt 180
       fd 1
     ]
 
     if [pcolor] of patch-left-and-ahead 90 1  = yellow [
-      set energy energy - energy * 0.05
+      if is-immune = 0 [
+        set energy energy - energy * 0.05
+      ]
       rt 90
       fd 1
     ]
@@ -193,13 +203,17 @@ to eaterActions
     ]
 
     if [pcolor] of patch-right-and-ahead 90 1 = yellow [
-      set energy energy - energy * 0.05
+      if is-immune = 0 [
+        set energy energy - energy * 0.05
+      ]
       lt 90
       fd 1
     ]
 
     if [pcolor] of patch-right-and-ahead 90 1 = red [
-      set energy energy - energy * 0.1
+      if is-immune = 0 [
+        set energy energy - energy * 0.1
+      ]
       lt 90
       fd 1
     ]
@@ -215,14 +229,6 @@ to eaterActions
         fd 1
       ]
     ]
-  ]
-end
-
-to eaterReproduce
-  ifelse random 101 < 70 [
-    create-eaters 1
-  ] [
-    create-cleaners 1
   ]
 end
 
@@ -351,7 +357,7 @@ GRAPHICS-WINDOW
 455
 -1
 -1
-3.38
+6.71
 1
 10
 1
@@ -362,9 +368,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-128
+64
 0
-128
+64
 1
 1
 1
@@ -397,7 +403,7 @@ spawn-prob-food
 spawn-prob-food
 5
 20
-5.0
+15.0
 1
 1
 %
@@ -412,7 +418,7 @@ spawn-prob-waste
 spawn-prob-waste
 0
 15
-15.0
+8.0
 1
 1
 %
@@ -427,7 +433,7 @@ spawn-prob-toxic-waste
 spawn-prob-toxic-waste
 0
 15
-15.0
+4.0
 1
 1
 %
@@ -469,7 +475,7 @@ INPUTBOX
 858
 441
 start-eaters
-10000.0
+50.0
 1
 0
 Number
@@ -480,7 +486,7 @@ INPUTBOX
 858
 363
 start-cleaners
-500.0
+50.0
 1
 0
 Number
@@ -491,7 +497,7 @@ INPUTBOX
 858
 284
 start-energy
-1000.0
+100.0
 1
 0
 Number
@@ -519,7 +525,7 @@ INPUTBOX
 858
 204
 cleaner-storage
-50.0
+30.0
 1
 0
 Number

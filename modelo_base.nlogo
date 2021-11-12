@@ -313,11 +313,11 @@ end
 GRAPHICS-WINDOW
 10
 10
-454
-455
+465
+466
 -1
 -1
-3.38
+13.55
 1
 10
 1
@@ -328,9 +328,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-128
+32
 0
-128
+32
 1
 1
 1
@@ -378,7 +378,7 @@ spawn-prob-waste
 spawn-prob-waste
 0
 15
-15.0
+4.0
 1
 1
 %
@@ -393,7 +393,7 @@ spawn-prob-toxic-waste
 spawn-prob-toxic-waste
 0
 15
-15.0
+5.0
 1
 1
 %
@@ -435,7 +435,7 @@ INPUTBOX
 858
 441
 start-eaters
-2000.0
+50.0
 1
 0
 Number
@@ -446,7 +446,7 @@ INPUTBOX
 858
 363
 start-cleaners
-500.0
+100.0
 1
 0
 Number
