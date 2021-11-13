@@ -311,13 +311,13 @@ to cleanerActions
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
+0
 10
-10
-465
+455
 466
 -1
 -1
-13.55
+6.88
 1
 10
 1
@@ -328,9 +328,9 @@ GRAPHICS-WINDOW
 1
 1
 0
-32
+64
 0
-32
+64
 1
 1
 1
@@ -338,10 +338,10 @@ ticks
 30.0
 
 BUTTON
-489
+474
 10
-580
-95
+538
+69
 Setup
 SetUp
 NIL
@@ -355,10 +355,10 @@ NIL
 1
 
 SLIDER
-489
-146
-661
-179
+473
+78
+645
+111
 spawn-prob-food
 spawn-prob-food
 5
@@ -370,10 +370,10 @@ spawn-prob-food
 HORIZONTAL
 
 SLIDER
-489
-200
-661
-233
+473
+132
+645
+165
 spawn-prob-waste
 spawn-prob-waste
 0
@@ -385,10 +385,10 @@ spawn-prob-waste
 HORIZONTAL
 
 SLIDER
-489
-254
-661
-287
+473
+186
+645
+219
 spawn-prob-toxic-waste
 spawn-prob-toxic-waste
 0
@@ -400,10 +400,10 @@ spawn-prob-toxic-waste
 HORIZONTAL
 
 SLIDER
-489
-306
-661
-339
+473
+238
+645
+271
 trashcans
 trashcans
 1
@@ -415,10 +415,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-488
-359
-661
-392
+472
+291
+645
+324
 energy-from-food
 energy-from-food
 1
@@ -430,10 +430,10 @@ energy
 HORIZONTAL
 
 INPUTBOX
-703
-381
-858
-441
+657
+247
+812
+307
 start-eaters
 50.0
 1
@@ -441,21 +441,21 @@ start-eaters
 Number
 
 INPUTBOX
-703
-303
-858
-363
+657
+169
+812
+229
 start-cleaners
-100.0
+200.0
 1
 0
 Number
 
 INPUTBOX
-703
-224
-858
-284
+657
+90
+812
+150
 start-energy
 1000.0
 1
@@ -463,10 +463,10 @@ start-energy
 Number
 
 BUTTON
-602
+548
 10
-699
-95
+611
+69
 Start
 Go
 T
@@ -480,10 +480,10 @@ NIL
 1
 
 INPUTBOX
-703
-144
-858
-204
+657
+10
+812
+70
 cleaner-storage
 50.0
 1
@@ -491,9 +491,9 @@ cleaner-storage
 Number
 
 PLOT
-911
+835
 10
-1530
+1279
 232
 Live agents over time
 Ticks
@@ -510,9 +510,9 @@ PENS
 "Cleaners" 1.0 0 -8990512 true "" "plot count cleaners"
 
 MONITOR
-1561
+1299
 10
-1635
+1364
 55
 Live eaters
 count eaters
@@ -521,9 +521,9 @@ count eaters
 11
 
 MONITOR
-1561
+1299
 66
-1646
+1372
 111
 Live cleaners
 count cleaners
@@ -532,9 +532,9 @@ count cleaners
 11
 
 MONITOR
-1561
+1299
 122
-1618
+1349
 167
 Food
 count patches with [pcolor = green]
@@ -543,9 +543,9 @@ count patches with [pcolor = green]
 11
 
 MONITOR
-1562
+1300
 239
-1641
+1379
 284
 Toxic waste
 count patches with [pcolor = red]
@@ -554,9 +554,9 @@ count patches with [pcolor = red]
 11
 
 MONITOR
-1562
+1300
 296
-1778
+1380
 341
 Normal waste
 count patches with [pcolor = yellow]
@@ -565,9 +565,9 @@ count patches with [pcolor = yellow]
 11
 
 MONITOR
-1561
+1299
 181
-1710
+1415
 226
 Eaters/Cleaners Ratio
 count eaters / count cleaners
@@ -576,9 +576,9 @@ count eaters / count cleaners
 11
 
 PLOT
-911
+835
 247
-1531
+1281
 447
 Eaters/Cleaners Ratio
 Ratio
@@ -939,6 +939,110 @@ NetLogo 6.2.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="start_cleaners_and_eaters_survival" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>count eaters</metric>
+    <enumeratedValueSet variable="energy-from-food">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trashcans">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spawn-prob-toxic-waste">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cleaner-storage">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spawn-prob-waste">
+      <value value="4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="start-eaters">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="start-cleaners">
+      <value value="50"/>
+      <value value="100"/>
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="start-energy">
+      <value value="1000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spawn-prob-food">
+      <value value="5"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="trashcans_and_eaters_survival" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>count eaters</metric>
+    <enumeratedValueSet variable="energy-from-food">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trashcans">
+      <value value="1"/>
+      <value value="5"/>
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spawn-prob-toxic-waste">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cleaner-storage">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spawn-prob-waste">
+      <value value="4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="start-eaters">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="start-cleaners">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="start-energy">
+      <value value="1000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spawn-prob-food">
+      <value value="5"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="cleaners_capacity_and_eaters_survival" repetitions="10" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <metric>count eaters</metric>
+    <enumeratedValueSet variable="energy-from-food">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="trashcans">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spawn-prob-toxic-waste">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="cleaner-storage">
+      <value value="10"/>
+      <value value="25"/>
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spawn-prob-waste">
+      <value value="4"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="start-eaters">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="start-cleaners">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="start-energy">
+      <value value="1000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="spawn-prob-food">
+      <value value="5"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
